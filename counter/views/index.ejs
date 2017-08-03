@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Counter</title>
+</head>
+<body>
+    <h1>Counter</h1>
+    <h3><%= counter %> times</h3>
+    <form action="/two_times" method='post'>
+        <input type="submit" value = '+2'>
+    </form></br>
+    <form action="/reset" method='post'>
+        <input type="submit" value = 'Reset Counter'>
+    </form>
+</body>
+</html>
