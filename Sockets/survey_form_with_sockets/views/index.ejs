@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type ="text/javascript">
+         $(document). ready(function (){
+            // this triggers the connection event in our server!
+            var socket  = io. connect();
+            // we'll write all the socket stuff after the above line!
+
+            function getFormData($form){
+                var unindexed_array = $form.serializeArray();
+                var indexed_array = {};
+
+                $.map(unindexed_array, function(n, i){
+                    indexed_array[n['name']] = n['value'];
+                });
+
+                return indexed_array;
+            }
+
+            $( 'form'). submit(function (){
+                event.preventDefault();
+                var $form = $(this);
+                var form_data = getFormData($form);
+                socket.emit( "posting_form", {form_data: form_data});
+            });
+            socket.on( 'server_response', function (data){
+                var response_string = 'You emitted the following information to the server: ';
+                response_string += data.form_display;
+                var num_string = 'Your lucky number emitted by the server is ';
+                num_string += data.lucky_num
+                document.getElementById('socket_response').innerHTML = '<p>' + response_string + '</p><p>' + num_string + '</p>'
+            });
+        })
+    </script>
+    <title>Survey Form</title>
+</head>
+<body>
+    <div id='socket_response'>
+    </div>
+    <form action="/process_survey" method='post'>
+        <label for="name">Your Name:</label>
+        <input type="text" name='name'><br/>
+        <label for="location">Dojo Location:</label>
+        <input list="location" name='location'>
+            <datalist id="location">
+                <option value="Chicago">
+                <option value="Seattle">
+                <option value="Los Angeles">
+                <option value="Dallas">
+                <option value="Washington DC">
+            </datalist><br/>
+        <label for="language">Favorite Language:</label>
+        <input list="language" name='language'>
+            <datalist id="language">
+                <option value="Node">
+                <option value="Python">
+                <option value="Ruby">
+                <option value="C#">
+            </datalist><br/>
+        <label for="comment">Comment (optional):</label><br/>
+        <textarea name="comment" cols="30" rows="10"></textarea><br/>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
