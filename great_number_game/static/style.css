@@ -1,0 +1,25 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+.feedback{
+    width: 180px;
+    height: 180px;
+    margin: 10px auto;
+    border: 1px solid black;
+    color: white;
+    padding: 10px;
+}
+
+.wrong{
+    background-color: red;
+}
+
+.right{
+    background-color: green;
+}
+
+.wrong h1{
+    margin-top: 70px;
+}

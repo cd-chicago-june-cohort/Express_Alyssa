@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/style.css">
+    <title>Great Number Game</title>
+</head>
+<body>
+    <div id="wrapper">
+        <h1>Welcome to the Great Number Game!</h1>
+        <h3>I am thinking of a number between 1 and 100</h3>
+        <h3>Take a guess!</h3>
+        <% if (feedback.type) { %>
+        <div class = 'feedback <%= feedback.type %>'>
+            <h1><%= feedback.string %></h1>
+            <% if (feedback.type == 'right') { %>
+            <a href="/reset"><button>Play Again?</button></a>
+            <% } %>
+        </div>
+        <% } %>    
+        <% if (feedback.type != 'right') { %>
+        <div id='guess'>
+            <form action="/process_guess" method = 'post'>
+                <input type="text" name="guess" id="guess"></br>
+                <input type="submit">
+            </form>
+        </div>
+        <% } %>
+    </div>
+</body>
+</html>
