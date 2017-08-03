@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/style.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type ="text/javascript">
+         $(document). ready(function (){
+            // this triggers the connection event in our server!
+            var socket  = io. connect();
+            // we'll write all the socket stuff after the above line!
+            
+            $('#epic_button').click(function(){
+                socket.emit('epic_click');
+            })
+
+            $('#reset_button').click(function(){
+                socket.emit('reset_click');
+            })
+
+            socket.on('update_count', function (data){
+                $('#message').html('The button has been pushed ' +  data.counter + ' times')
+            });
+        })
+    </script>
+    <title>Epic Button</title>
+</head>
+<body>
+    <div id='container'>
+        <h1 id='message'></h1>
+        <div id='push'>
+            <p>Push the button to update the count!</p>
+            <button id='epic_button'>Push the epic button</button>
+        </div>
+        <div id='reset'>
+            <button id='reset_button'>Reset count</button>
+        </div>
+    </div>
+</body>
+</html>
