@@ -37,13 +37,13 @@ $(document). ready(function (){
         updateScroll();
     });
 
-    $(document).on('submit', '#message_form', (function(event){
+    $(document).on('submit', '#message_form', function(event){
         event.preventDefault();
         var message = $('#message_input').val();
         $('#message_input').val('');
         socket.emit('post_message', {name: user_name, message: message});
         updateScroll();
-    }));
+    });
 
     socket.on('update_messages', function(data){
         var new_message_html = '<p>' + data.new_message.name + ': ' + data.new_message.message + '</p>';
@@ -55,7 +55,5 @@ $(document). ready(function (){
         var user_left_html = '<p class="system_message">' + data.disconnected_user.user_name + ' has left the chat</p.';
         $('#chats').append(user_left_html);
         updateScroll();
-    });
-
-    
+    });  
 });
