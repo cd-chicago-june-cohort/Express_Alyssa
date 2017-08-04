@@ -1,0 +1,33 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#container{
+    width: 900px;
+}
+
+h3{
+    text-decoration: underline;
+}
+
+#chats{
+    width: 480px;
+    height: 300px;
+    overflow: scroll;
+    border: 1px solid black;
+    margin: 10px 0;
+    padding: 0 10px;
+}
+
+#message_input{
+    width: 480px;
+    display: block;
+    border: 1px solid black;
+    margin: 10px 0;
+    padding: 3px 10px;
+}
+
+.system_message{
+    color: grey;
+    font-style: italic;
+}
